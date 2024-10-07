@@ -78,9 +78,12 @@ void Sprite::Draw()
 	// 座標変換行列CBufferの場所を設定
 	spriteBasic_->GetDX12Basic()->GetCommandList()->SetGraphicsRootConstantBufferView(1, transformationMatrixResource_->GetGPUVirtualAddress());
 
+	//D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = TextureManager::GetInstance()->GetSRVGpuHandle(textureIndex_);
+	
 	// SRVのDescriptorTableを設定,テクスチャを指定
 	spriteBasic_->GetDX12Basic()->GetCommandList()->SetGraphicsRootDescriptorTable(2, TextureManager::GetInstance()->GetSRVGpuHandle(textureIndex_));
-
+		//TextureManager::GetInstance()->GetSRVGpuHandle(textureIndex_)
+		// spriteBasic_->GetDX12Basic()->GetSRVGpuDescriptorHandle(0)
 	// 描画
 	spriteBasic_->GetDX12Basic()->GetCommandList()->DrawIndexedInstanced(6, 1, 0, 0, 0);
 }

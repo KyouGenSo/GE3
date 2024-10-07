@@ -61,7 +61,7 @@ void TextureManager::LoadTexture(const std::string& filePath)
 	assert(SUCCEEDED(hr));
 
 	// テクスチャデータを追加
-	textureDatas_.resize(textureDatas_.size() + 1 + kSRVIndexStart);
+	textureDatas_.resize(textureDatas_.size() + 1);
 
 	// 追加したテクスチャデータを取得
 	TextureData& textureData = textureDatas_.back();
@@ -71,7 +71,7 @@ void TextureManager::LoadTexture(const std::string& filePath)
 	textureData.resource = dx12_->MakeTextureResource(textureData.metadata);
 
 	// テクスチャデータの要素番号をSRVのインデックスとして使用
-	uint32_t srvIndex = static_cast<uint32_t>(textureDatas_.size());
+	uint32_t srvIndex = static_cast<uint32_t>(textureDatas_.size() - 1) + kSRVIndexStart;
 
 	// テクスチャデータのSRVハンドルを取得
 	textureData.srvCpuHandle = dx12_->GetSRVCpuDescriptorHandle(srvIndex);
