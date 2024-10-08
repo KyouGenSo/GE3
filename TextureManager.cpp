@@ -69,7 +69,7 @@ void TextureManager::LoadTexture(const std::string& filePath)
 	textureData.filePath = filePath;
 	textureData.metadata = mipImages.GetMetadata();
 	textureData.resource = dx12_->MakeTextureResource(textureData.metadata);
-	Microsoft::WRL::ComPtr<ID3D12Resource> resource = dx12_->UploadTextureData(textureData.resource, mipImages);
+	Microsoft::WRL::ComPtr<ID3D12Resource> intermediateResource = dx12_->UploadTextureData(textureData.resource, mipImages);
 
 	// テクスチャデータの要素番号をSRVのインデックスとして使用
 	uint32_t srvIndex = static_cast<uint32_t>(textureDatas_.size() - 1) + kSRVIndexStart;
@@ -85,7 +85,7 @@ void TextureManager::LoadTexture(const std::string& filePath)
 	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
 	srvDesc.Texture2D.MipLevels = UINT(textureData.metadata.mipLevels);
 
-	dx12_->GetDevice()->CreateShaderResourceView(resource.Get(), &srvDesc, textureData.srvCpuHandle);
+	dx12_->GetDevice()->CreateShaderResourceView(textureData.resource.Get(), &srvDesc, textureData.srvCpuHandle);
 }
 
 uint32_t TextureManager::GetTextureIndex(const std::string& filePath)

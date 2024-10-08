@@ -679,6 +679,7 @@ void DX12Basic::CreateBufferResource(ComPtr<ID3D12Resource>& buffer, size_t size
 }
 
 Microsoft::WRL::ComPtr<ID3D12Resource> DX12Basic::MakeTextureResource(const DirectX::TexMetadata& metaData)
+
 {
 	// テクスチャの設定
 	D3D12_RESOURCE_DESC resourceDesc{};

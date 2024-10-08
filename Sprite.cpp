@@ -122,7 +122,7 @@ void Sprite::CreateMaterialData()
 	materialResource_->Map(0, nullptr, reinterpret_cast<void**>(&materialData_));
 
 	// マテリアルデータの初期値を書き込む
-	materialData_->color = Vector4(0.0f, 0.0f, 0.0f, 1.0f);
+	materialData_->color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
 	materialData_->enableLighting = false;
 	materialData_->uvTransform = Mat4x4::MakeIdentity();
 }
