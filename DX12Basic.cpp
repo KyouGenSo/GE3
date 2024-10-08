@@ -701,7 +701,7 @@ Microsoft::WRL::ComPtr<ID3D12Resource> DX12Basic::MakeTextureResource(const Dire
 		&heapProperties, // ヒープの設定
 		D3D12_HEAP_FLAG_NONE, // Heapの特殊な設定。特になし
 		&resourceDesc, // リソースの設定
-		D3D12_RESOURCE_STATE_COPY_DEST, // リソースの初期状態. データ転送される設定
+		D3D12_RESOURCE_STATE_GENERIC_READ, // リソースの初期状態. GENERIC_READ
 		nullptr, // クリア値の設定。今回は使わないのでnullptr
 		IID_PPV_ARGS(&textureResource)); // 生成したリソースのpointerへのpointerを取得
 	assert(SUCCEEDED(hr));
